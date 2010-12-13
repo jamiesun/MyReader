@@ -47,7 +47,7 @@ Flickable {
         clip: true
         preferredWidth: flickable.width
         preferredHeight: flickable.height
-        html: content
+        html: "<style> body{font-size：12px;} </style>"+content
         settings.javascriptEnabled: true
         settings.pluginsEnabled: true
         settings.localContentCanAccessRemoteUrls: true
@@ -95,8 +95,8 @@ Flickable {
         id:tbar
         color: "#ffffff"
         opacity: web_view.opacity-0.1
-        width: flickable.parent.width
-        height: 32;y:flickable.parent.height-32
+        width: flickable.parent.width+2
+        height: 32;y:flickable.parent.height-30
         gradient: Gradient {
             GradientStop {
                 position: 0
@@ -138,8 +138,8 @@ Flickable {
                 onClicked: flickable.back()
             }
         }
-
     }
+
     Lodding{
         id:lodding
         x:0;y:web_view.progress<1?0:-lodding.height

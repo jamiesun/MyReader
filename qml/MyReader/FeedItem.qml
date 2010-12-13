@@ -10,10 +10,6 @@ FocusScope{
     Rectangle {
         id: itembox
         radius: 5
-        anchors.rightMargin: 2
-        anchors.leftMargin: 2
-        anchors.topMargin: 2
-        anchors.bottomMargin: 2
         anchors.fill: parent
         opacity: 0.3
     }
@@ -28,7 +24,7 @@ FocusScope{
         textFormat: TextEdit.RichText
         wrapMode: TextEdit.WordWrap
         smooth: true
-        font.pixelSize: 14
+        font.pointSize:8
     }
 }
 

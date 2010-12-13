@@ -13,7 +13,10 @@ QT +=  webkit network
 # Needs to be defined for Symbian
 DEFINES += NETWORKACCESS
 
-symbian:TARGET.UID3 = 0xE7F0205E
+symbian:{
+    TARGET.UID3 = 0xE7F0205E
+    ICON = MyReader.svg
+}
 
 # Define QMLJSDEBUGGER to allow debugging of QML in debug builds
 # (This might significantly increase build time)
@@ -58,7 +61,9 @@ OTHER_FILES += \
     qml/MyReader/pic/alls.png \
     qml/MyReader/pic/about.png \
     qml/MyReader/Menu.qml \
-    qml/MyReader/Alert.qml
+    qml/MyReader/Alert.qml \
+    qml/MyReader/pic/lodding.gif \
+    MyReader.svg
 
 RESOURCES +=
 

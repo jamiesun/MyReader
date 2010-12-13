@@ -20,6 +20,11 @@ Item {
 
    Utils{id:utils}
 
+   Keys.onPressed:{
+       if(event.key==17825793)
+           finish()
+   }
+
     KeyNavigation.down:ebox
 
     onFocusChanged: {
@@ -47,15 +52,15 @@ Item {
             color: "#ffffff"
             text: "You Email:"
             anchors.top: parent.top
-            anchors.topMargin: 8
+            anchors.topMargin: 5
             anchors.left: parent.left
             anchors.leftMargin: 20
-            font.pixelSize: 12
+            font.pointSize:8
         }
 
         Rectangle {
             id: ebox
-            height: 26
+            height: 30
             color: email.activeFocus?"#ffffff":"#dbdbdb"
             radius: 5
             anchors.top: text1.bottom
@@ -76,7 +81,7 @@ Item {
                 anchors.bottomMargin: 5
                 anchors.topMargin: 5
                 anchors.fill: parent
-                font.pixelSize: 14
+                font.pointSize:7
                 KeyNavigation.down:passwd;KeyNavigation.up:okbutton
             }
         }
@@ -89,13 +94,13 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 20
             anchors.top: ebox.bottom
-            anchors.topMargin: 8
-            font.pixelSize: 12
+            anchors.topMargin: 5
+            font.pointSize:8
         }
 
         Rectangle {
             id: pbox
-            height: 26
+            height: 30
             color: passwd.activeFocus?"#ffffff":"#dbdbdb"
             radius: 5
             anchors.top: text2.bottom
@@ -112,7 +117,7 @@ Item {
                 text: config.passwd
                 echoMode:TextInput.Password
                 cursorVisible: activeFocus
-                font.pixelSize: 14
+                font.pointSize:7
                 anchors.fill: parent
                 anchors.topMargin: 5
                 anchors.rightMargin: 5
@@ -130,9 +135,9 @@ Item {
             height: 20
             color: "#ffffff"
             text: "Feeds maxnum:"
-            font.pixelSize: 12
+            font.pointSize:8
             anchors.top: pbox.bottom
-            anchors.topMargin: 8
+            anchors.topMargin: 5
             anchors.leftMargin: 20
             anchors.left: parent.left
         }
@@ -141,7 +146,7 @@ Item {
             id: nums
             x: 4
             y: 4
-            height: 26
+            height: 30
             color: fnum.activeFocus?"#ffffff":"#dbdbdb"
             radius: 5
             anchors.top: text3.bottom
@@ -153,7 +158,7 @@ Item {
                 text: feedMax
                 validator: IntValidator{bottom: 10; top: 1000;}
                 cursorVisible: activeFocus
-                font.pixelSize: 14
+                font.pointSize:7
                 anchors.fill: parent
                 anchors.topMargin: 5
                 anchors.rightMargin: 5
@@ -185,7 +190,7 @@ Item {
             Text {
                 id: text4;x: 38;y: 6; color: "#f3f0f0"
                 text: "ok";anchors.centerIn: parent
-                wrapMode: Text.WordWrap;font.pixelSize: 14
+                wrapMode: Text.WordWrap;font.pointSize:8
             }
             MouseArea{
                 anchors.fill: parent

@@ -29,7 +29,7 @@ FocusScope {
         }
     }
 
-    //Keys.onDigit5Pressed:tbar.visible = !tbar.visible
+    Keys.onDigit5Pressed:tbar.visible = !tbar.visible
 
 
     ListModel{
@@ -74,12 +74,8 @@ FocusScope {
     Component {
         id: highlight
         Rectangle {
-            color: "dimgray"; radius: 6
+            color: "dimgray"; radius: 5
             width: list_menu.width
-            anchors.rightMargin: 3
-            anchors.leftMargin: 3
-            anchors.topMargin: 3
-            anchors.bottomMargin: 3
             Behavior on x { SpringAnimation { spring: 3; damping: 0.2 } }
             Behavior on y { SpringAnimation { spring: 3; damping: 0.2 } }
         }
@@ -87,34 +83,36 @@ FocusScope {
 
     ListView {
         id: list_menu
+        clip: true
         anchors.rightMargin: 10
         anchors.leftMargin: 10
-        anchors.bottomMargin: 35
+        anchors.bottomMargin: tbar.visible?35:10
         anchors.topMargin: 10
         anchors.fill: parent
         keyNavigationWraps: true
         model: menuModel
         highlight: highlight
+        spacing: 5
         delegate: Item{
             id:mitem
             width: list_menu.width
-            height: 42
+            height: 48
             property string it_source: src
             property string it_name: name
             Rectangle {
                 id: item;radius:5; opacity: 0.3
-                anchors{fill:parent;rightMargin: 2;leftMargin: 2;topMargin: 2;bottomMargin: 2}
+                anchors.fill:parent
             }
 
             Image {
                 source: icon
                 width: 32;height: 32
-                x:5;y:5
+                x:5;y:9
             }
 
             Text {
                 id:text_it;width: parent.width-40;color: "#ffffff";text: it_name
-                smooth: true;font.pixelSize: 16
+                smooth: true;font.pointSize: 10
                 anchors{left: parent.left;leftMargin: 40;verticalCenter: parent.verticalCenter}
 
             }

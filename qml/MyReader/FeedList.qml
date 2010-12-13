@@ -55,11 +55,7 @@ FocusScope {
     Component {
         id: highlight
         Rectangle {
-            color: "dimgray"; radius: 6
-            anchors.rightMargin: 3
-            anchors.leftMargin: 3
-            anchors.topMargin: 3
-            anchors.bottomMargin: 3
+            color: "dimgray"; radius: 5
             //anchors.fill: feed_list.currentItem
             Behavior on x { SpringAnimation { spring: 3; damping: 0.2 } }
             Behavior on y { SpringAnimation { spring: 3; damping: 0.2 } }
@@ -68,14 +64,15 @@ FocusScope {
 
     ListView {
         id: feed_list
+        clip: true
         anchors.rightMargin: 10
         anchors.leftMargin: 10
-        anchors.bottomMargin: 35
+        anchors.bottomMargin: tbar.visible?35:10
         anchors.topMargin: 10
         anchors.fill: parent
         model: feedModel
         highlight: highlight
-
+        spacing:5
         delegate: FeedItem{
             id:feeditem
             function action(){
