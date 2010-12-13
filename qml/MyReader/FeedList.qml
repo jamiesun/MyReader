@@ -72,7 +72,7 @@ FocusScope {
         anchors.fill: parent
         model: feedModel
         highlight: highlight
-        spacing:5
+        spacing:2
         delegate: FeedItem{
             id:feeditem
             function action(){
@@ -120,6 +120,7 @@ FocusScope {
         Image {
             id: img_back;width: 32;height: 32; opacity: 1;x: parent.width-32
             source: "pic/back.png"
+            smooth:true
             MouseArea{
                 id:bmouse
                 y:-3

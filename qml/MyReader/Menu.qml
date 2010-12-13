@@ -10,17 +10,19 @@ FocusScope {
     signal doStarred(string source)
     signal doNotes(string source)
     signal doSettings()
+    signal doAbout()
     signal quit()
 
 
     function doAction(itext,source){
         if(itext=="All items"){doAllitems(source)}
-        else if(itext=="You follows"){doFollows(source)}
+        else if(itext=="Your follows"){doFollows(source)}
         else if(itext=="Subscriptions"){doSubscriptions(source)}
         else if(itext=="All tags"){doTags(source)}
         else if(itext=="Starred items"){doStarred(source)}
         else if(itext=="All notes"){doNotes(source)}
         else if(itext=="settings"){doSettings()}
+        else if(itext=="About MyReader"){doAbout()}
     }
 
     onFocusChanged: {
@@ -40,7 +42,7 @@ FocusScope {
             src:"https://www.google.com/reader/atom/user/-/state/com.google/reading-list"
         }
         ListElement{
-            name:"You follows"
+            name:"Your follows"
             icon:"pic/follows.png"
             src:"https://www.google.com/reader/atom/user/-/state/com.google/broadcast-friends"
         }
@@ -69,6 +71,11 @@ FocusScope {
             icon:"pic/settings.png"
             src:""
         }
+        ListElement{
+            name:"About MyReader"
+            icon:"pic/about.png"
+            src:""
+        }
     }
 
     Component {
@@ -92,7 +99,7 @@ FocusScope {
         keyNavigationWraps: true
         model: menuModel
         highlight: highlight
-        spacing: 5
+        spacing: 2
         delegate: Item{
             id:mitem
             width: list_menu.width
@@ -111,7 +118,7 @@ FocusScope {
             }
 
             Text {
-                id:text_it;width: parent.width-40;color: "#ffffff";text: it_name
+                id:text_it;width: parent.width-48;color: "#ffffff";text: it_name
                 smooth: true;font.pointSize: 10
                 anchors{left: parent.left;leftMargin: 40;verticalCenter: parent.verticalCenter}
 

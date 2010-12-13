@@ -63,7 +63,10 @@ OTHER_FILES += \
     qml/MyReader/Menu.qml \
     qml/MyReader/Alert.qml \
     qml/MyReader/pic/lodding.gif \
-    MyReader.svg
+    MyReader.svg \
+    qml/MyReader/About.qml \
+    qml/MyReader/pic/ok.png \
+    qml/MyReader/pic/jamiesun.jpg
 
 RESOURCES +=
 

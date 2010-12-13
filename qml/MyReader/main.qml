@@ -101,6 +101,7 @@ Rectangle {
         onDoSettings: {
             main.state = "settings"
         }
+        onDoAbout:main.state = "about"
 
         onQuit: Qt.quit()
     }
@@ -113,6 +114,7 @@ Rectangle {
             initConfig();
             main.state = "showMenu";
         }
+        onCancel:main.state = "showMenu";
     }
 
     FeedList {
@@ -173,6 +175,13 @@ Rectangle {
         }
     }
 
+    About{
+        id:about
+        width:main.width;height:main.height;x:main.width;y:0
+        Behavior on x{NumberAnimation{duration: 200}}
+        onClick:main.state = "showMenu"
+    }
+
     states: [
         State {name: "showMenu";PropertyChanges {target: menulist;focus:true}},
         State {
@@ -189,6 +198,11 @@ Rectangle {
             name: "showItem"
             PropertyChanges {target: itemFeeds;x: -main.width}
             PropertyChanges {target: feedDetail;x: 0;focus: true}
+        },
+        State {
+            name: "about"
+            PropertyChanges {target: menulist;x: -main.width}
+            PropertyChanges { target: about;x: 0;focus:true}
         },
         State {
             name: "quit"

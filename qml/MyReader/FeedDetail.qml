@@ -111,6 +111,7 @@ Flickable {
         Image {
             id: img_previous;x:0;y:0
             source: "pic/previous.png"
+            smooth:true
             MouseArea{
                 scale: 2
                 anchors.fill: parent
@@ -120,6 +121,7 @@ Flickable {
         Image {
             id: img_next;x:tbar.width-32;y:0
             source: "pic/next.png"
+            smooth:true
             MouseArea{
                 scale: 2;x:-3
                 anchors.fill: parent
@@ -131,6 +133,7 @@ Flickable {
             id: img_back;width: 32;height: 32
             anchors.centerIn: parent
             source: "pic/back.png"
+            smooth:true
             MouseArea{
                 y:-3
                 scale: 2

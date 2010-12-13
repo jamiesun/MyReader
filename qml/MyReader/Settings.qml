@@ -7,6 +7,7 @@ Item {
     property string passwd: ""
     property string feedMax: "100"
     signal finish()
+    signal cancel()
 
     function doSave(){
         if(email.text==""){ebox.forceActiveFocus();}
@@ -21,8 +22,8 @@ Item {
    Utils{id:utils}
 
    Keys.onPressed:{
-       if(event.key==17825793)
-           finish()
+       if(event.key==17825793)cancel()
+       else if(event.key==17825792)doSave()
    }
 
     KeyNavigation.down:ebox
@@ -33,16 +34,10 @@ Item {
         }
     }
 
-    Rectangle {
+    Flickable {
         id: box
-        color: "#4b4b4b"
-        radius: 8
         anchors.fill: parent
-        anchors.bottomMargin: 10
-        anchors.topMargin: 10
-        anchors.rightMargin: 9
-        anchors.leftMargin: 9
-        border.color: "#828282"
+        anchors.bottomMargin: 40
 
 
         Text {
@@ -50,7 +45,7 @@ Item {
             width: 80
             height: 20
             color: "#ffffff"
-            text: "You Email:"
+            text: "Your Email:"
             anchors.top: parent.top
             anchors.topMargin: 5
             anchors.left: parent.left
@@ -64,7 +59,7 @@ Item {
             color: email.activeFocus?"#ffffff":"#dbdbdb"
             radius: 5
             anchors.top: text1.bottom
-            anchors.topMargin: 5
+            anchors.topMargin: 8
             anchors.right: parent.right
             anchors.rightMargin: 20
             anchors.left: parent.left
@@ -82,7 +77,7 @@ Item {
                 anchors.topMargin: 5
                 anchors.fill: parent
                 font.pointSize:7
-                KeyNavigation.down:passwd;KeyNavigation.up:okbutton
+                KeyNavigation.down:passwd;KeyNavigation.up:nums
             }
         }
 
@@ -90,7 +85,7 @@ Item {
             id: text2
             height: 20
             color: "#ffffff"
-            text: "You Password:"
+            text: "Your Password:"
             anchors.left: parent.left
             anchors.leftMargin: 20
             anchors.top: ebox.bottom
@@ -104,7 +99,7 @@ Item {
             color: passwd.activeFocus?"#ffffff":"#dbdbdb"
             radius: 5
             anchors.top: text2.bottom
-            anchors.topMargin: 5
+            anchors.topMargin: 8
             anchors.right: parent.right
             anchors.rightMargin: 20
             anchors.left: parent.left
@@ -137,7 +132,7 @@ Item {
             text: "Feeds maxnum:"
             font.pointSize:8
             anchors.top: pbox.bottom
-            anchors.topMargin: 5
+            anchors.topMargin: 8
             anchors.leftMargin: 20
             anchors.left: parent.left
         }
@@ -151,8 +146,8 @@ Item {
             radius: 5
             anchors.top: text3.bottom
             border.color: "#403e3e"
-            anchors.topMargin: 5
-            KeyNavigation.up:passwd;KeyNavigation.down:okbutton
+            anchors.topMargin: 8
+            KeyNavigation.up:passwd;KeyNavigation.down:email
             TextInput {
                 id: fnum
                 text: feedMax
@@ -160,7 +155,7 @@ Item {
                 cursorVisible: activeFocus
                 font.pointSize:7
                 anchors.fill: parent
-                anchors.topMargin: 5
+                anchors.topMargin:8
                 anchors.rightMargin: 5
                 anchors.bottomMargin: 5
                 focus: nums.activeFocus
@@ -172,32 +167,45 @@ Item {
             anchors.leftMargin: 20
             anchors.left: parent.left
         }
-
-        Rectangle {
-            id: okbutton;x: 77;
-            width: 100;height: 27;radius: 8
-            anchors.top: nums.bottom
-            anchors.topMargin: 8
-            anchors.horizontalCenter: parent.horizontalCenter
-            opacity: activeFocus?1:0.8
-            border.width:activeFocus?1:0; smooth: true
-            KeyNavigation.up:fnum;KeyNavigation.down:email
-            gradient: Gradient {
-                GradientStop {position: 0;color: "#beb4b4"}
-                GradientStop { position: 1; color: "#272727"}
+    }
+    Rectangle{
+        id:tbar
+        color: "#ffffff"
+        opacity: 0.8
+        width: parent.width
+        height: 32;y:parent.height-32
+        gradient: Gradient {
+            GradientStop {
+                position: 0
+                color: "#999999"
             }
 
-            Text {
-                id: text4;x: 38;y: 6; color: "#f3f0f0"
-                text: "ok";anchors.centerIn: parent
-                wrapMode: Text.WordWrap;font.pointSize:8
+            GradientStop {
+                position: 1
+                color: "#444444"
             }
+        }
+        Image {
+            id: imgok;x:0;y:0
+            source: "pic/ok.png"
+            width:32;height:32
+            smooth:true
             MouseArea{
+                scale: 2
                 anchors.fill: parent
                 onClicked: doSave();
             }
-
-            Keys.onSelectPressed: doSave();
+        }
+        Image {
+            id: imgcl;x:tbar.width-32;y:0
+            source: "pic/back.png"
+            width:32;height:32
+            smooth:true
+            MouseArea{
+                scale: 2;x:-3
+                anchors.fill: parent
+                onClicked: config.finish()
+            }
         }
     }
 }
