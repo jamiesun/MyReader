@@ -122,6 +122,7 @@ Rectangle {
         property string  history: ""
         auth: main.auth
         sid: main.sid
+        feedMax: main.feedMax
         width:main.width;height:main.height;x:main.width;y:0
         Behavior on x{NumberAnimation{duration: 200}}
 

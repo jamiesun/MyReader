@@ -2,6 +2,7 @@ WorkerScript.onMessage = function(message) {
     var src = message.source;
     var auth = message.auth;
     var sid = message.sid;
+    var feedMax = message.feedMax
     var model = message.model;
 
     var doneCbk  = function(result){
@@ -58,7 +59,7 @@ WorkerScript.onMessage = function(message) {
     }
 
     if(auth&&sid){
-        getFeeds(src,auth,sid,doneCbk);
+        getFeeds(src,auth,sid,feedMax,doneCbk);
     }
     else{
          WorkerScript.sendMessage({error:"auth info error"});
@@ -69,7 +70,7 @@ WorkerScript.onMessage = function(message) {
 
 
 //更新订阅
-function getFeeds(slink,authStr,sid,callback){
+function getFeeds(slink,authStr,sid,feedMax,callback){
     var http = new XMLHttpRequest();
     http.onreadystatechange = function() {
         if (http.readyState == XMLHttpRequest.DONE) {
@@ -86,14 +87,14 @@ function getFeeds(slink,authStr,sid,callback){
             }
         }
     }
-    http.open("GET", slink);
+    http.open("GET", slink+"?n="+feedMax);
     http.setRequestHeader("Authorization","GoogleLogin auth="+authStr);
     http.setRequestHeader("Cookie","SID="+sid);
     http.setRequestHeader("accept-encoding", "gzip, deflate")
     //console.log("auth string:"+authStr+"\n\n sid="+sid)
     try {
       console.log("http getFeeds send "+slink)
-      http.send("n=100");
+      http.send();
     } catch (e) {
         console.log(e)
         callback({code:-1,error:e});

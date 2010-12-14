@@ -4,6 +4,7 @@ FocusScope {
     id: feedlist
     property string auth: ''
     property string sid: ''
+    property string feedMax: "100"
     signal itemClick(string content)
     signal loginTimeout()
     signal error(string msg)
@@ -34,7 +35,7 @@ FocusScope {
 
     function update(src){
         console.log("update "+src)
-        feedWork.sendMessage({source:src,model:feedModel,auth:auth,sid:sid})
+        feedWork.sendMessage({source:src,model:feedModel,auth:auth,sid:sid,feedMax:feedMax})
         isLoadding = true;
     }
 
