@@ -5,6 +5,7 @@ FocusScope {
     id: feedlist
     property string auth: ''
     property string sid: ''
+    property string feedMax: "100"
     signal itemClick(string content)
     signal loginTimeout()
     signal error(string msg)
@@ -50,17 +51,16 @@ FocusScope {
         console.log("update "+src)
         var cacheData = utils.getCache(Qt.md5(src))
         if(cacheData){
-            //console.log("cache:"+Qt.md5(src))
+            console.log("cache:"+Qt.md5(src))
             feedModel.clear()
             var jobjs = JSON.parse(cacheData)
             for(var i=0;i<jobjs.length;i++){
                 feedModel.append(jobjs[i])
             }
         }else{
-            feedWork.sendMessage({source:src,model:feedModel,auth:auth,sid:sid})
+            feedWork.sendMessage({source:src,auth:auth,sid:sid,feedMax:feedlist.feedMax})
             isLoadding = true;
         }
-
     }
 
     function previous(){
