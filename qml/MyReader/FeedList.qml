@@ -1,5 +1,6 @@
 import Qt 4.7
-
+import Utils 1.0
+import "json2.js" as Json
 FocusScope {
     id: feedlist
     property string auth: ''
@@ -9,6 +10,8 @@ FocusScope {
     signal error(string msg)
     signal back()
     property bool isLoadding: false
+
+    Utils{id:utils}
 
     onFocusChanged: {
         if(activeFocus){
@@ -27,15 +30,37 @@ FocusScope {
                 console.log("logn timeout");
                 error("auth timeout")
                 loginTimeout();
+            }else{
+               // console.log(JSON.stringify(messageObject.data));
+               feedModel.clear()
+               var result = messageObject.data;
+
+               for(var i=0;i<result.length;i++){
+                    feedModel.append(result[i])
+               }
+               utils.setCache(Qt.md5(messageObject.src),JSON.stringify(messageObject.data))
+               isLoadding = false;
             }
-            isLoadding = false;
+
+
         }
     }
 
     function update(src){
         console.log("update "+src)
-        feedWork.sendMessage({source:src,model:feedModel,auth:auth,sid:sid})
-        isLoadding = true;
+        var cacheData = utils.getCache(Qt.md5(src))
+        if(cacheData){
+            //console.log("cache:"+Qt.md5(src))
+            feedModel.clear()
+            var jobjs = JSON.parse(cacheData)
+            for(var i=0;i<jobjs.length;i++){
+                feedModel.append(jobjs[i])
+            }
+        }else{
+            feedWork.sendMessage({source:src,model:feedModel,auth:auth,sid:sid})
+            isLoadding = true;
+        }
+
     }
 
     function previous(){

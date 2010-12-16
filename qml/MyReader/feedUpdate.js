@@ -2,7 +2,7 @@ WorkerScript.onMessage = function(message) {
     var src = message.source;
     var auth = message.auth;
     var sid = message.sid;
-    var model = message.model;
+   // var model = message.model;
 
     var doneCbk  = function(result){
         if(result.code==1){
@@ -10,8 +10,9 @@ WorkerScript.onMessage = function(message) {
         }else if(result.code==-1){
             WorkerScript.sendMessage({error:result.error});
         }else if(result.code==0){
-            model.clear();
+            //model.clear();
             var doc = result.data;
+            var jresult = [];
             for (var ii = 0; ii < doc.childNodes.length; ++ii) {
                 if(doc.childNodes[ii].nodeName=="entry"){
                     var entry = doc.childNodes[ii]
@@ -27,7 +28,9 @@ WorkerScript.onMessage = function(message) {
                             //console.log(content)
                         }
                     }
-                    model.append({title:title,from:from,content:content,link:""});
+                    var obj = {title:title,from:from,content:content,link:""};
+//                    model.append();
+                    jresult.push(obj);
                 }else if(doc.childNodes[ii].nodeName=="list"){
 
                     var list = doc.firstChild
@@ -37,7 +40,9 @@ WorkerScript.onMessage = function(message) {
                             var title,link;
                             title = obj.childNodes[1].firstChild.nodeValue;
                             link = "https://www.google.com/reader/atom/"+obj.childNodes[0].firstChild.nodeValue;
-                            model.append({title:title,link:link,from:"",content:""});
+                            //model.append({title:title,link:link,from:"",content:""});
+                            var obj = {title:title,link:link,from:"",content:""};
+                            jresult.push(obj);
                         }
                     }else  if(list.attributes[0].value == "tags"){
                         for(var k = 0; k < list.childNodes.length; ++k){
@@ -45,15 +50,17 @@ WorkerScript.onMessage = function(message) {
                             var title,link;
                             link = "https://www.google.com/reader/atom/"+obj.childNodes[0].firstChild.nodeValue;
                             title = link.substr(link.lastIndexOf('/')+1)
-                            model.append({title:title,link:link,from:"",content:""});
+                            //model.append({title:title,link:link,from:"",content:""});
+                            var obj = {title:title,link:link,from:"",content:""};
+                            jresult.push(obj);
                         }
                     }
 
 
                 }
             }
-            model.sync();
-            WorkerScript.sendMessage({src:src});
+            //model.sync();
+            WorkerScript.sendMessage({src:src,data:jresult});
         }
     }
 

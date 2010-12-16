@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QFSFileEngine>
+#include <QDir>
 
 class Utils : public QObject
 {
@@ -11,6 +12,8 @@ public:
     explicit Utils(QObject *parent = 0);
     Q_INVOKABLE QString read(const QString &fname);
     Q_INVOKABLE void write(const QString &fname,const QString &ctx);
+    Q_INVOKABLE QString getCache(const QString &key);
+    Q_INVOKABLE void setCache(const QString  &key,const QString &value);
 signals:
 
 public slots:
@@ -18,11 +21,18 @@ public slots:
 private:
     QString getPath()
     {
+        QString path;
     #if defined(Q_OS_SYMBIAN)
-        return QString("C://");
+        path = QString("C://.myreader//");
     #else
-        return QFSFileEngine::homePath()+"/.myreader/";
+        path = QFSFileEngine::homePath()+"/.myreader/";
     #endif
+        QDir dir(path);
+        if(!dir.exists(path))
+        {
+            dir.mkdir(path);
+        }
+        return path;
     }
 };
 
