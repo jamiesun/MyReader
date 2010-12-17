@@ -2,6 +2,8 @@ Qt.include("json2.js")
 
 var Api = {};
 
+//prefix url
+
 Api.auth_url = "https://www.google.com/accounts/ClientLogin";
 
 Api.token_url = "http://www.google.com/reader/api/0/token"
