@@ -66,7 +66,8 @@ OTHER_FILES += \
     MyReader.svg \
     qml/MyReader/About.qml \
     qml/MyReader/pic/ok.png \
-    qml/MyReader/pic/jamiesun.jpg
+    qml/MyReader/pic/jamiesun.jpg \
+    qml/MyReader/cache.js
 
 RESOURCES +=
 

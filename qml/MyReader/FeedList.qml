@@ -1,6 +1,5 @@
 import Qt 4.7
-import Utils 1.0
-import "json2.js" as Json
+import "cache.js" as Cache
 FocusScope {
     id: feedlist
     property string auth: ''
@@ -12,7 +11,6 @@ FocusScope {
     signal back()
     property bool isLoadding: false
 
-    Utils{id:utils}
 
     onFocusChanged: {
         if(activeFocus){
@@ -39,7 +37,7 @@ FocusScope {
                for(var i=0;i<result.length;i++){
                     feedModel.append(result[i])
                }
-               utils.setCache(Qt.md5(messageObject.src),JSON.stringify(messageObject.data))
+               Cache.set(Qt.md5(messageObject.src),JSON.stringify(messageObject.data))
                isLoadding = false;
             }
 
@@ -49,7 +47,7 @@ FocusScope {
 
     function update(src){
         console.log("update "+src)
-        var cacheData = utils.getCache(Qt.md5(src))
+        var cacheData = Cache.get(Qt.md5(src))
         if(cacheData){
             console.log("cache:"+Qt.md5(src))
             feedModel.clear()
@@ -126,6 +124,7 @@ FocusScope {
         id:tbar
         opacity:0.7
         width: parent.width
+        visible: parent.height>240
         height: 32; gradient: Gradient {
             GradientStop {
                 position: 0

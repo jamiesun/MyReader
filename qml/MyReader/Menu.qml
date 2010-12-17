@@ -146,6 +146,7 @@ FocusScope {
         opacity:0.8
         width: parent.width
         height: 32;
+        visible: parent.height>240
         gradient: Gradient {
             GradientStop {
                 position: 0

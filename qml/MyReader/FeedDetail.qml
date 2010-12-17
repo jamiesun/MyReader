@@ -97,6 +97,7 @@ Flickable {
         opacity: web_view.opacity-0.1
         width: flickable.parent.width+2
         height: 32;y:flickable.parent.height-30
+        visible: flickable.parent.height>240
         gradient: Gradient {
             GradientStop {
                 position: 0
