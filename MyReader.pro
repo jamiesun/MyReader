@@ -16,6 +16,13 @@ DEFINES += NETWORKACCESS
 symbian:{
     TARGET.UID3 = 0xE7F0205E
     ICON = MyReader.svg
+    TARGET.CAPABILITY = NetworkServices \
+        LocalServices \
+        ReadUserData \
+        WriteUserData \
+        UserEnvironment \
+        ReadDeviceData \
+        WriteDeviceData
 }
 
 # Define QMLJSDEBUGGER to allow debugging of QML in debug builds
@@ -67,7 +74,9 @@ OTHER_FILES += \
     qml/MyReader/About.qml \
     qml/MyReader/pic/ok.png \
     qml/MyReader/pic/jamiesun.jpg \
-    qml/MyReader/cache.js
+    qml/MyReader/cache.js \
+    qml/MyReader/json2.js \
+    qml/MyReader/Api.js
 
 RESOURCES +=
 

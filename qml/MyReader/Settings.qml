@@ -5,7 +5,7 @@ Item {
    // width: 240;height: 320
     property string email: ""
     property string passwd: ""
-    property string feedMax: "100"
+    property string feedMax: "30"
     signal finish()
     signal cancel()
 
@@ -13,7 +13,7 @@ Item {
         if(email.text==""){ebox.forceActiveFocus();}
         else if(passwd.text==""){pbox.forceActiveFocus();}
         else{
-            var fnums = fnum.text?fnum.text:"100"
+            var fnums = fnum.text?fnum.text:"30"
             utils.write(".config",email.text+","+passwd.text+","+fnums);
             finish();
         }

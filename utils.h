@@ -23,7 +23,7 @@ private:
     {
         QString path;
     #if defined(Q_OS_SYMBIAN)
-        path = QString("C://.myreader//");
+        path = QString("E://.myreader//");
     #else
         path = QFSFileEngine::homePath()+"/.myreader/";
     #endif
