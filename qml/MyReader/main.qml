@@ -46,7 +46,7 @@ Rectangle {
 
 
     function initConfig(){
-        var cfgstr = utils.read(".config")
+        var cfgstr = utils.safeRead(".config")
         if(cfgstr == ""){
             main.state = "settings"
         }else{

@@ -12,6 +12,8 @@ public:
     explicit Utils(QObject *parent = 0);
     Q_INVOKABLE QString read(const QString &fname);
     Q_INVOKABLE void write(const QString &fname,const QString &ctx);
+    Q_INVOKABLE QString safeRead(const QString &fname);
+    Q_INVOKABLE void safeWrite(const QString &fname,const QString &ctx);
     Q_INVOKABLE QString getCache(const QString &key);
     Q_INVOKABLE void setCache(const QString  &key,const QString &value);
 signals:
@@ -34,6 +36,7 @@ private:
         }
         return path;
     }
+
 };
 
 #endif // UTILS_H

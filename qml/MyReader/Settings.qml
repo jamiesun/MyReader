@@ -6,6 +6,7 @@ Item {
     property string email: ""
     property string passwd: ""
     property string feedMax: "30"
+
     signal finish()
     signal cancel()
 
@@ -14,7 +15,7 @@ Item {
         else if(passwd.text==""){pbox.forceActiveFocus();}
         else{
             var fnums = fnum.text?fnum.text:"30"
-            utils.write(".config",email.text+","+passwd.text+","+fnums);
+            utils.safeWrite(".config",email.text+","+passwd.text+","+fnums);
             finish();
         }
     }
@@ -110,7 +111,7 @@ Item {
             TextInput {
                 id: passwd;focus: pbox.activeFocus
                 text: config.passwd
-                echoMode:TextInput.Password
+                echoMode:TextInput.PasswordEchoOnEdit
                 cursorVisible: activeFocus
                 font.pointSize:7
                 anchors.fill: parent

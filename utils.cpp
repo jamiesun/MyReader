@@ -30,6 +30,43 @@ QString Utils::read(const QString &fname)
     return QString::fromUtf8(file.readAll());
 }
 
+QString Utils::safeRead(const QString &fname)
+{
+    if(!QFile::exists(getPath()+fname))
+    {
+        return "";
+    }
+
+    QFile file(getPath()+fname);
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    QString result = QString::fromUtf8(file.readAll());
+
+    int len = result.length();
+    for(int i=0;i<len;++i)
+    {
+       result[i] = QChar::fromAscii(result[i].toAscii() + 1);
+    }
+
+    return result;
+
+}
+
+void Utils::safeWrite(const QString &fname, const QString &ctx)
+{
+    QString dest = ctx;
+    int len = dest.length();
+    for(int i=0;i<len;++i)
+    {
+       dest[i] = QChar::fromAscii(dest[i].toAscii() - 1);
+    }
+
+    QFile file(getPath()+fname);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&file);
+    out << dest.toUtf8();
+    file.close();
+}
+
 QString Utils::getCache(const QString &fname)
 {
     QFile file(getPath()+fname);
